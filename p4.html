@@ -4,71 +4,71 @@
     <title>BMI Calculator</title>
     <style>
         .container {
-    text-align: center;
-    margin-top: 100px;
-    font-family: Arial, sans-serif;
-}
+            text-align: center;
+            margin-top: 100px;
+            font-family: Arial, sans-serif;
+        }
 
-input {
-    padding: 10px;
-    margin: 5px;
-    font-size: 16px;
-}
+        input {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
 
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-}
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
 
-#result {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>BMI Calculator</h1>
         <input type="text" id="weight" placeholder="Enter weight (kg)">
-        <input type="text" id="height" placeholder="Enter height (m)">
+        <input type="text" id="height" placeholder="Enter height (cm)">
         <button id="calculate">Calculate BMI</button>
         <div id="result"></div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let weightInput = document.getElementById("weight");
+            let heightInput = document.getElementById("height");
+            let calculateButton = document.getElementById("calculate");
+            let resultDiv = document.getElementById("result");
+
+            calculateButton.addEventListener("click", function () {
+                let weight = parseFloat(weightInput.value);
+                let height = parseFloat(heightInput.value);
+
+                if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
+                    resultDiv.textContent = "Please enter valid weight and height values.";
+                } else {
+                    // Convert height from cm to meters
+                    let heightInMeters = height / 100;
+
+                    const bmi = weight / (heightInMeters * heightInMeters);
+                    let result = "";
+
+                    if (bmi <= 18.4) {
+                        result = "Underweight";
+                    } else if (bmi >= 18.5 && bmi <= 24.9) {
+                        result = "Normal Weight";
+                    } else if (bmi >= 25 && bmi <= 29.9) {
+                        result = "Overweight";
+                    } else {
+                        result = "Obese";
+                    }
+
+                    resultDiv.textContent = `Your BMI is ${bmi.toFixed(2)}. You are ${result}.`;
+                }
+            });
+        });
+    </script>
 </body>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const weightInput = document.getElementById("weight");
-    const heightInput = document.getElementById("height");
-    const calculateButton = document.getElementById("calculate");
-    const resultDiv = document.getElementById("result");
-
-    calculateButton.addEventListener("click", function () {
-        const weight = parseFloat(weightInput.value);
-        const height = parseFloat(heightInput.value);
-
-        if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
-            resultDiv.textContent = "Please enter valid weight and height values.";
-        } else {
-            const bmi = weight / (height * height);
-            let result = "";
-
-            if (bmi <= 18.4) {
-                result = "Underweight";
-            } else if (bmi >= 18.5 && bmi <= 24.9) {
-                result = "Normal Weight";
-            } else if (bmi >= 25 && bmi <= 29.9) {
-                result = "Overweight";
-            } else {
-                result = "Obese";
-            }
-
-            resultDiv.textContent = `Your BMI is ${bmi.toFixed(2)}. You are ${result}.`;
-        }
-    });
-});
-
-</script>
 </html>
