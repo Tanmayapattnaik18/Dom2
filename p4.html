@@ -49,7 +49,6 @@
                 if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
                     resultDiv.textContent = "Please enter valid weight and height values.";
                 } else {
-                    // Convert height from cm to meters
                     let heightInMeters = height / 100;
 
                     const bmi = weight / (heightInMeters * heightInMeters);
